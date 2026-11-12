@@ -42,6 +42,12 @@
     --display:'Archivo Black', 'Archivo', sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-padding-top:84px;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip}
+  body{-webkit-tap-highlight-color:transparent}
+  br.m{display:none}
+  .b-short{display:none}
+  .menu-btn{display:none}
+  .mnav[hidden]{display:none}
   html{scroll-behavior:smooth}
   body{
     background:var(--paper);
@@ -96,7 +102,7 @@
   @keyframes blink{50%{opacity:.15}}
 
   /* ---------- hero ---------- */
-  .hero{position:relative;min-height:100vh;padding:120px 28px 34px;overflow:hidden;display:flex;flex-direction:column}
+  .hero{position:relative;min-height:100vh;min-height:100svh;padding:120px 28px 34px;overflow:hidden;display:flex;flex-direction:column}
   .grid-lines{position:absolute;inset:0;pointer-events:none}
   .grid-lines i{position:absolute;border:0 dashed var(--line)}
   .grid-lines .v{top:0;bottom:0;border-left-width:1px}
@@ -326,7 +332,8 @@
   .rv{opacity:0;transform:translateY(30px);transition:opacity .9s, transform .9s cubic-bezier(.2,.7,.1,1)}
   .rv.on{opacity:1;transform:none}
 
-  /* ---------- mobile ---------- */
+
+  /* ---------- tablets + phones ---------- */
   @media (max-width:860px){
     nav{grid-template-columns:1fr auto;padding:14px 18px}
     nav .mid{display:none}
@@ -366,6 +373,124 @@
     .field label{border-right:0;padding-bottom:0}
     .foot-grid{grid-template-columns:1fr}
   }
+  /* ================= PHONES (≤ 600px): built for one-thumb reading ================= */
+  @media (max-width:600px){
+    body::after{inset:0;animation:none;opacity:.28}
+    nav{padding:14px 18px;padding-top:max(14px, env(safe-area-inset-top));align-items:center}
+    nav .links{display:none}
+    .b-long{display:none} .b-short{display:inline}
+    nav .brand{font-size:12px;letter-spacing:.2em}
+    .menu-btn{display:inline-block;font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+      background:var(--ink);color:var(--paper);border:0;padding:12px 16px;min-height:44px}
+
+    /* mobile menu */
+    .mnav{position:fixed;inset:0;z-index:960;background:var(--paper);display:flex;flex-direction:column;padding:14px 18px 28px;padding-top:max(14px, env(safe-area-inset-top));padding-bottom:max(28px, env(safe-area-inset-bottom));animation:mIn .35s cubic-bezier(.2,.7,.1,1)}
+    @keyframes mIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+    .mnav-stripe{position:absolute;top:0;bottom:0;right:22px;width:56px;background:var(--yellow);z-index:-1}
+    .mnav-top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+    .mnav-links{list-style:none;margin:auto 0;padding:24px 0}
+    .mnav-links li{border-top:1px solid var(--ink)}
+    .mnav-links li:last-child{border-bottom:1px solid var(--ink)}
+    .mnav-links a{display:flex;align-items:baseline;gap:16px;padding:18px 0;font-family:var(--display);font-size:clamp(34px,10.5vw,46px);line-height:1;text-transform:uppercase}
+    .mnav-links i{font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.2em;width:28px;flex:none}
+    .mnav-links a:active{background:var(--yellow)}
+    .mnav-foot{display:grid;gap:8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding-right:90px}
+    .mnav-foot a{border-bottom:2px solid var(--ink)}
+    body.menu-open{overflow:hidden}
+
+    /* hero: poster stack, headline allowed to run over the stripe */
+    .hero{padding:96px 18px 28px}
+    br.m{display:inline}
+    .stripe{left:auto;right:22px;width:56px;padding-bottom:20px}
+    .stripe .vert{font-size:13px;gap:14px}
+    .stripe .stamp-mark{width:84px;height:84px;margin-top:14px;margin-right:6px}
+    .stamp{display:none}
+    .grid-lines .v:nth-child(2){left:50%!important}
+    .headline{max-width:none;margin-top:4vh;margin-bottom:36px;z-index:2;font-size:24vw}
+    .hero-meta{grid-template-columns:1fr 1fr;width:calc(100% - 92px);gap:16px 14px;font-size:10px;letter-spacing:.14em}
+
+    /* section headers: label above the title */
+    section.block{padding:72px 18px}
+    .label-row{flex-direction:column-reverse;align-items:flex-start;gap:12px;margin-bottom:34px}
+    .label-row h2{font-size:clamp(40px,12vw,56px)}
+
+    /* route */
+    .route{grid-template-columns:1fr}
+    .route .side{display:none}
+    .route .map{padding:0}
+    .route .alt{font-size:14px;letter-spacing:.18em;margin-bottom:6px}
+    .route svg{margin:0 -6px;width:calc(100% + 12px)}
+    .route svg text{font-size:30px;letter-spacing:.1em}
+    .route svg .path{stroke-width:4}
+    .specs{grid-column:1;padding:24px 0 0;grid-template-columns:1fr 1fr;gap:18px 14px}
+    .specs dd{font-size:15px}
+    .bignum{grid-column:1;padding:30px 0 0;gap:14px}
+    .bignum .n{font-size:118px}
+    .bignum .loc{margin-left:0;width:100%;padding-bottom:0}
+
+    /* packages */
+    .packs{grid-template-columns:1fr;gap:18px}
+    .pack{min-height:0;padding:26px 20px 24px}
+    .pack .band{right:18px;width:26px}
+    .pack .band span{font-size:10px;letter-spacing:.2em}
+    .pack h3{font-size:42px}
+    .pack ul{margin:22px 0 26px;padding-right:52px}
+    .pack li{font-size:14px;padding:11px 0}
+    .hex{padding:16px 40px}
+    .hex .p{font-size:34px}
+    .note{line-height:1.7}
+
+    /* projects */
+    .projects{grid-template-columns:minmax(0,1fr);gap:40px}
+    .pc-cta:nth-child(n){grid-column:auto}
+    .pc-tag{opacity:1;transform:none;left:12px;bottom:12px;padding:8px 12px;font-size:10px}
+    .pc-meta{grid-template-columns:auto 1fr auto;gap:12px}
+    .pc-count{display:block}
+    .pc-no{font-size:24px}
+    .pc-name{font-size:24px}
+    .pc-sub{flex-direction:row;gap:14px}
+    .pc-sub span+span::before{display:inline;margin-right:14px}
+    .pc-cta{padding:22px;min-height:0;gap:18px}
+    .pc-cta .stamp-mark{width:76px;height:76px}
+    .pc-cta b{font-size:40px}
+
+    /* booking */
+    .book{gap:34px}
+    .book .left .hexlogo{max-width:300px;padding:26px 40px}
+    .hexlogo .big{font-size:38px}
+    .hexlogo .r1{font-size:11px}
+    .field input,.field select,.field textarea{font-size:16px;padding:12px 18px 16px}
+    .field label{padding:14px 18px 0}
+    .form-foot{flex-direction:row-reverse;justify-content:space-between}
+    .form-foot button{flex:1;min-height:52px}
+    .form-foot .form-stamp{width:76px;height:76px;margin:-6px 0}
+
+    /* footer */
+    footer{padding:56px 18px 28px;padding-bottom:max(28px, env(safe-area-inset-bottom))}
+    .foot-grid{gap:24px}
+    .forged{font-size:12px}
+    .badge{width:92px;height:92px}
+    .giant{margin-top:28px}
+    .legal{flex-direction:column;gap:6px}
+
+    /* set viewer + lightbox */
+    .set-bar{padding-top:max(12px, env(safe-area-inset-top))}
+    .set-intro h3{font-size:clamp(44px,13vw,64px)}
+    .lb img{max-width:100vw;max-height:72vh}
+    .lb-nav{top:auto;bottom:max(40px, env(safe-area-inset-bottom));transform:none;padding:14px 22px}
+    .lb-close{top:max(16px, env(safe-area-inset-top))}
+    .lb-cap{bottom:auto;top:max(28px, env(safe-area-inset-top))}
+  }
+  @media (hover:none){
+    .pack:hover{transform:none;box-shadow:none}
+    .proj-card:hover .pc-shot img,.cover:hover img{transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    body::after,.ticker .track,.badge svg,.dot{animation:none}
+    .headline span b,.stripe{animation:none}
+  }
+
+
 </style>
 </head>
 <body>
@@ -403,7 +528,7 @@
 
 <!-- ================= NAV ================= -->
 <nav>
-  <a href="#top" class="brand">Friday ★ Saturday Studio</a>
+  <a href="#top" class="brand"><span class="b-long">Friday ★ Saturday Studio</span><span class="b-short">FRI/SAT ★ Studio</span></a>
   <div class="mid"><span class="dot"></span><span id="status">Status: —</span></div>
   <div class="links">
     <a href="#route">Process</a>
@@ -411,7 +536,25 @@
     <a href="#work">Work</a>
     <a href="#book">Book</a>
   </div>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav">Menu</button>
 </nav>
+
+<div class="mnav" id="mnav" hidden>
+  <div class="mnav-stripe" aria-hidden="true"></div>
+  <div class="mnav-top"><span class="brand">FRI/SAT ★ Studio</span><button class="menu-btn" id="menuClose">Close ✕</button></div>
+  <ol class="mnav-links">
+    <li><a href="#route"><i>01</i>Process</a></li>
+    <li><a href="#packs"><i>02</i>Packages</a></li>
+    <li><a href="#work"><i>03</i>Work</a></li>
+    <li><a href="#book"><i>04</i>Book a shoot</a></li>
+  </ol>
+  <div class="mnav-foot">
+    <div><span class="dot"></span><span class="m-status">Status: —</span></div>
+    <div>Text <a class="phone-link" href="#"></a></div>
+    <div><a href="https://www.instagram.com/fridaysaturdaystudio/" target="_blank" rel="noopener">@fridaysaturdaystudio</a></div>
+    <div class="mute">Savannah, GA · 32.0809° N</div>
+  </div>
+</div>
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
@@ -445,8 +588,8 @@
   </div>
 
   <h1 class="headline">
-    <span><b>One shoot.</b></span>
-    <span><b class="outline">A month of</b></span>
+    <span><b>One <br class="m">shoot.</b></span>
+    <span><b class="outline">A month <br class="m">of</b></span>
     <span><b>content.</b></span>
   </h1>
 
@@ -741,7 +884,8 @@
   function fitHeadline(){
     const h = document.querySelector('.headline'), stripe = document.querySelector('.stripe');
     h.style.fontSize = '';
-    const limit = stripe.getBoundingClientRect().left - h.getBoundingClientRect().left - 32;
+    const phone = matchMedia('(max-width:600px)').matches;
+    const limit = phone ? document.documentElement.clientWidth - 36 : stripe.getBoundingClientRect().left - h.getBoundingClientRect().left - 32;
     const widest = Math.max(...[...h.querySelectorAll('b')].map(b => b.scrollWidth));
     if (widest > limit){
       h.style.fontSize = (parseFloat(getComputedStyle(h).fontSize) * limit / widest) + 'px';
@@ -797,6 +941,40 @@
     } else if (openSet && e.key === 'Escape') hideSet();
   });
 
+
+  // ---- footer FRI/SAT always fits the screen ----
+  function fitGiant(){
+    const g = document.querySelector('.giant'); if (!g) return;
+    g.style.fontSize = '';
+    const max = g.parentElement.clientWidth - 4;
+    if (g.scrollWidth > max) g.style.fontSize = (parseFloat(getComputedStyle(g).fontSize) * max / g.scrollWidth) + 'px';
+  }
+  fitGiant(); addEventListener('resize', fitGiant);
+  if (document.fonts) document.fonts.ready.then(fitGiant);
+
+  // ---- mobile menu ----
+  const mnav = document.getElementById('mnav'), menuBtn = document.getElementById('menuBtn');
+  function setMenu(open){
+    mnav.hidden = !open; menuBtn.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('menu-open', open);
+    if (open) document.getElementById('menuClose').focus();
+  }
+  menuBtn.addEventListener('click', () => setMenu(true));
+  document.getElementById('menuClose').addEventListener('click', () => setMenu(false));
+  mnav.querySelectorAll('.mnav-links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !mnav.hidden) setMenu(false); });
+
+  // ---- swipe between photos in the full-screen viewer ----
+  let tx = null, ty = null;
+  lb.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+  lb.addEventListener('touchend', e => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) showLb(lbIdx + (dx < 0 ? 1 : -1));
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) lb.hidden = true;   // swipe down closes
+    tx = ty = null;
+  });
+
   // ---- live clock + open status ----
   const clock = document.getElementById('clock');
   const status = document.getElementById('status');
@@ -805,6 +983,7 @@
     clock.textContent = d.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit', second:'2-digit'});
     const day = d.getDay(); // 5 = Fri, 6 = Sat
     status.textContent = (day === 5 || day === 6) ? 'Status: On set today' : 'Status: Booking next Fri/Sat';
+    document.querySelectorAll('.m-status').forEach(e => e.textContent = status.textContent);
   }
   tick(); setInterval(tick, 1000);
   document.getElementById('yr').textContent = new Date().getFullYear();
